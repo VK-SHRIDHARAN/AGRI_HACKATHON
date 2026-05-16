@@ -1,6 +1,6 @@
 # Multimodal AI System for Crop Disease and Insect Prediction
 
-A unified Multimodal Artificial Intelligence Framework designed to simultaneously detect crop diseases and insect infestations using both Computer Vision and Tabular Intelligence pipelines.
+A unified multimodal artificial intelligence framework designed to simultaneously detect crop diseases and insect infestations using both computer vision and tabular intelligence pipelines.
 
 The system combines image-based deep learning models with structured agricultural field metrics to generate robust and fail-safe crop health predictions through a rule-based fusion mechanism.
 
@@ -42,41 +42,39 @@ https://drive.google.com/file/d/1caG4CiGlMT52DEqOpAg6ndTmhJEnuVHN/view?usp=shari
 The framework processes multi-source agricultural inputs through parallel AI pipelines before merging outputs into a unified prediction layer.
 
 ```text
-			  +---------------+
-			  |  Crop Image   |
-			  +-------+-------+
-					  |
-					  v
-		+---------------------------+
-		|   Image Streaming Layer   |
-		+------+--------------+-----+
-			   |              |
-			   v              v
-		 +-----------+   +-----------+
-		 |  YOLOv8   |   |  YOLOv8   |
-		 | (Disease) |   | (Insects) |
-		 +-----+-----+   +-----+-----+
-			   |              |
-			   v              v
-		 [Output-1]    [Output-2]
-			   |              |
-			   +------+-------+
-					  |
-					  v
-		 +---------------------------+
-		 |    Rule-Based Fusion      |
-		 |      Logic Engine         |
-		 +------------+--------------+
-					  ^
-					  |
-		 +---------------------------+
-		 | TabNet (Tabular Features) |
-		 |   [Output-3 & Output-4]   |
-		 +-------------+-------------+
-					   |
-			 +---------+---------+
-			 | Environmental CSV |
-			 +--------------------+
+              ┌───────────────┐
+              │  Crop Image   │
+              └───────┬───────┘
+                      ▼
+        ┌───────────────────────────┐
+        │   Image Streaming Layer   │
+        └──────┬─────────────┬──────┘
+               │             │
+               ▼             ▼
+         ┌───────────┐ ┌───────────┐
+         │  YOLOv8   │ │  YOLOv8   │
+         │ (Disease) │ │ (Insects) │
+         └─────┬─────┘ └─────┬─────┘
+               │             │
+               ▼             ▼
+         [Output-1]    [Output-2]
+               │             │
+               └──────┬──────┘
+                      ▼
+         ┌───────────────────────────┐
+         │    Rule-Based Fusion      │
+         │      Logic Engine         │
+         └────────────┬──────────────┘
+                      ▲
+                      │
+         ┌───────────────────────────┐
+         │ TabNet (Tabular Features) │
+         │   [Output-3 & Output-4]   │
+         └─────────────▲─────────────┘
+                       │
+             ┌─────────┴─────────┐
+             │ Environmental CSV │
+             └───────────────────┘
 ```
 
 ## Core Components
@@ -147,14 +145,14 @@ The framework follows a pessimistic fusion approach to maximize crop safety.
 
 ```text
 if either (YOLOv8_Disease is True) or (TabNet_Disease is True):
-	Final_Disease_Status = "PRESENT"
+    Final_Disease_Status = "PRESENT"
 else:
-	Final_Disease_Status = "ABSENT"
+    Final_Disease_Status = "ABSENT"
 
 if either (YOLOv8_Insect is True) or (TabNet_Insect is True):
-	Final_Insect_Status = "PRESENT"
+    Final_Insect_Status = "PRESENT"
 else:
-	Final_Insect_Status = "ABSENT"
+    Final_Insect_Status = "ABSENT"
 ```
 
 ## Performance Metrics
@@ -192,10 +190,10 @@ datasets/
 │   └── cvat_xml_to_yolo.py
 
 └── insect/
-	├── images/
-	├── labels/
-	├── annotations.xml
-	└── cvat_xml_to_yolo.py
+    ├── images/
+    ├── labels/
+    ├── annotations.xml
+    └── cvat_xml_to_yolo.py
 ```
 
 ## Setup and Installation
@@ -259,8 +257,8 @@ python tabnet_infer.py --csv input_data.csv
 
 ```bash
 python fusion.py --image1 path/to/disease_output.txt \
-				 --image2 path/to/insect_output.txt \
-				 --csv_output path/to/tabnet_output.txt
+                 --image2 path/to/insect_output.txt \
+                 --csv_output path/to/tabnet_output.txt
 ```
 
 ## Technologies Used
